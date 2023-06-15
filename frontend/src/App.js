@@ -1,11 +1,16 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./routes/Home";
+import OrderSuccess from "./routes/OrderSuccess";
+
+
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/">
           <Route index element={<Home />} />
+          <Route path="success" element={<OrderSuccess />} />
+
           {/* 
           <Route
             path="account"
