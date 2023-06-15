@@ -9,16 +9,20 @@
 <style>
     body{
         background-image: url(bhueats.jpg);
-        background-size: cover;
+        background-size: auto;
     }
     .place{
-        margin: 100px 100px 100px 150px ;
         border-width: 1px;
         border-radius: 1rem; 
         text-align: center;  
-        background-color: rgb(200, 150, 100);
+        background-color: rgb(250, 150, 50);
         opacity: 75%;
+        margin-right: 300px;
+
+        
+
     }
+     
     button{
         width: 50%;
       
@@ -28,16 +32,32 @@
         font-size: 16px;
         font-weight: bold;
         border-radius: 15px;
+        overflow: hidden;
+        opacity: 100%;
+    }
+    button :hover{
+        background-color: cornsilk;
+        text-emphasis:none;
+        text-size-adjust: 100%;
+    }
+    a{
+        color: black;
+        text-decoration: none;
+        outline: none;
     }
 </style>
 <body>
     <div class="place">
+        <br><br><br>
         <h1>WELCOME TO BINGHAM EATS</h1>
         <h2>Your number 1 site to order food in bingham univerity</h2>
         <h2>Specify who is using our sevices</h2>
         <div>
+            <form action="#">
+                <input type="text" id="token" name="token" placeholder="Enter the ID Token">
+            </form>
             <button>
-                <a href="">
+                <a href="#">
                     STUDENT
                 </a>
             </button>
@@ -46,6 +66,7 @@
                         RESTAURANT
                     </a>
                 </BUtton>
+                <br><br><br><br><br><br>
         </div>
     </div>
 </body>

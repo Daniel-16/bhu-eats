@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"name": "bhu-eats",
+			"path": "../../bhu-eats"
+		}
+	],
+	"settings": {},
+	"launch": {
+		"configurations": [
+			{
+				"type": "msedge",
+				"name": "https://github.com/LogicLegends/bhu-eats.git",
+				"request": "launch",
+				"url": "https://github.com/LogicLegends/bhu-eats.git"
+			}
+		]
+	}
+}
