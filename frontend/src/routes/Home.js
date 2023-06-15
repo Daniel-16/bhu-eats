@@ -1,6 +1,37 @@
 import { useState } from "react";
+import axios from "axios";
 const Home = () => {
-  const [formState, setformState] = useState("success");
+  const [formState, setformState] = useState("place-order");
+  const [foods, setFoods] = useState([]);
+
+  const eateryIDs = {
+    bonAppetite: "648b0b96603c54fd86f892a1",
+    munchBox: "648b0f5ef4b30e98fce1dd19",
+  };
+
+  const getFoodList = async (e) => {
+    let targetEatery;
+
+    // Set eatery ID
+    if (e.target.value === "ba") {
+      targetEatery = eateryIDs.bonAppetite;
+    } else {
+      targetEatery = eateryIDs.munchBox;
+    }
+
+    // Make request
+    try {
+      const response = await axios({
+        url: `https://bhu-eats-server.onrender.com/getRestFoods/${targetEatery}`,
+        method: "GET",
+      });
+
+      setFoods(response?.data?.foods);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="home-wrapper relative w-full min-h-full flex flex-col items-center justify-center bg-white lg:py-24">
       <div className="w-full min-h-[50vh] md:w-[50%] lg:w-[35%] md:bg-white md:shadow-lg rounded-md p-10 z-30">
@@ -50,10 +81,12 @@ const Home = () => {
                 <label className="font-semibold text-gray-600">
                   Order from:
                 </label>
-                <select className="w-full border h-10 px-2 rounded-md text-gray-600 ">
-                  <option value="davta">Davta</option>
-                  <option value="ngk">NGK</option>
-                  <option value="omega"></option>
+                <select
+                  className="w-full border h-10 px-2 rounded-md text-gray-600"
+                  onChange={getFoodList}
+                >
+                  <option value="ba">Bon Appetite</option>
+                  <option value="mb">Munch Box</option>
                 </select>
               </div>
 
@@ -62,35 +95,44 @@ const Home = () => {
               </div>
 
               {/* Order */}
-              <div className="form-row mb-5">
-                <label className="font-semibold text-gray-600">Main Dish</label>
-                <select className="w-full border h-10 px-2 rounded-md text-gray-600 ">
-                  <option value="rice">Rice</option>
-                  <option value="yam">Yam</option>
-                  <option value="spagetti">Spagetti</option>
-                </select>
+              <div className="flex items-center justify-between">
+                {foods.map((item) => {
+                  return <div>Food</div>;
+                })}
               </div>
+              <div className="hidden">
+                <div className="form-row mb-5">
+                  <label className="font-semibold text-gray-600">
+                    Main Dish
+                  </label>
+                  <select className="w-full border h-10 px-2 rounded-md text-gray-600 ">
+                    <option value="rice">Rice</option>
+                    <option value="yam">Yam</option>
+                    <option value="spagetti">Spagetti</option>
+                  </select>
+                </div>
 
-              <div className="form-row mb-5">
-                <label className="font-semibold text-gray-600">
-                  Protiens Dish
-                </label>
-                <select className="w-full border h-10 px-2 rounded-md text-gray-600">
-                  <option value="beef">Beef</option>
-                  <option value="sausage">Sausage</option>
-                  <option value="goat-meat">Goat Meat</option>
-                  <option value="fish">Fish</option>
-                </select>
-              </div>
+                <div className="form-row mb-5">
+                  <label className="font-semibold text-gray-600">
+                    Protiens Dish
+                  </label>
+                  <select className="w-full border h-10 px-2 rounded-md text-gray-600">
+                    <option value="beef">Beef</option>
+                    <option value="sausage">Sausage</option>
+                    <option value="goat-meat">Goat Meat</option>
+                    <option value="fish">Fish</option>
+                  </select>
+                </div>
 
-              <div className="form-row mb-5">
-                <label className="font-semibold text-gray-600">Drinks</label>
-                <select className="w-full border h-10 px-2 rounded-md text-gray-600">
-                  <option value="rice">Water</option>
-                  <option value="yam">Cway</option>
-                  <option value="spagetti">Coke</option>
-                  <option value="spagetti">Sprite</option>
-                </select>
+                <div className="form-row mb-5">
+                  <label className="font-semibold text-gray-600">Drinks</label>
+                  <select className="w-full border h-10 px-2 rounded-md text-gray-600">
+                    <option value="rice">Water</option>
+                    <option value="yam">Cway</option>
+                    <option value="spagetti">Coke</option>
+                    <option value="spagetti">Sprite</option>
+                  </select>
+                </div>
               </div>
 
               {/* Delivery */}
@@ -141,7 +183,7 @@ const Home = () => {
           </div>
         )}
 
-        {/* Order ID login */}
+        {/* Order */}
         {formState === "check-order" && (
           <form>
             <input
